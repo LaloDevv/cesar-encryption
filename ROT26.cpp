@@ -30,9 +30,6 @@ void encriptar(){
     cin.ignore();
     getline(cin,palabra);
 
-    for(int i = 0; i < palabra.length(); i++){
-        palabra[i] = tolower(palabra[i]);
-    }
     
     int n;
 
@@ -48,14 +45,27 @@ void encriptar(){
     for(int i = 0; i < palabra.length(); i++){
 
         if(palabra[i] != 32){
-            if(palabra[i] + n > 122){
+
+            if(palabra[i] + n < 91){
+
+                palabra[i] += + n;
+
+            }else if(palabra[i] + n > 90 && palabra[i] < 91){
+
+                int m;
+                m = (palabra[i] + n) - 90;
+                palabra[i] = 65 + (m - 1);
+
+            }else if(palabra[i] + n > 96 && palabra[i] + n < 123){
+
+                palabra[i] += + n;
+
+            }else if(palabra[i] + n > 122){
 
                 int m;
                 m = (palabra[i] + n) - 122;
                 palabra[i] = 97 + (m - 1);
 
-            }else{
-                palabra[i] += + n;
             }
         }    
     }
@@ -75,10 +85,6 @@ void desemcriptar(){
     cin.ignore();
     getline(cin,palabra);
 
-     for(int i = 0; i < palabra.length(); i++){
-        palabra[i] = tolower(palabra[i]);
-    }
-
     int n;
 
     do{
@@ -94,14 +100,26 @@ void desemcriptar(){
 
         if(palabra[i] != 32){
             
-            if(palabra[i] - n < 97){
+            if(palabra[i] - n < 65){
+
+                int m;
+                m = 65 - (palabra[i] - n);
+                palabra[i] = 90 - (m - 1); 
+
+            }else if(palabra[i] - n > 64 && palabra[i] - n < 91 && palabra[i] < 91){
+
+                palabra[i] += - n;
+
+            }else if(palabra[i] - n < 97 && palabra[i] > 96){
 
                 int m;
                 m = 97 - (palabra[i] - n);
                 palabra[i] = 122 - (m - 1);
 
-            }else{
+            }else if(palabra[i] - n > 96 && palabra[i] - n < 123){
+
                 palabra[i] += - n;
+
             }
         }
     }
